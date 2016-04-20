@@ -32,6 +32,14 @@ ngBabbage.directive('babbage', ['$http', '$rootScope', '$location', 'babbageApi'
         return $scope.$on('babbageUpdate', listener);
       };
 
+      self.subscribeQuery = function(listener) {
+        return $scope.$on('babbageQuery', listener);
+      };
+
+      self.broadcastQuery = function(endpoint, params) {
+          $scope.$broadcast('babbageQuery', endpoint, params);
+      };
+
       self.getState = function() {
         return $scope.state;
       };

@@ -36,6 +36,9 @@ ngBabbage.directive('babbageFacts', ['$rootScope', '$http', '$q', function($root
       aq.page = 0;
       var dfd = $http.get(babbageCtrl.getApiUrl('facts'),
                           babbageCtrl.queryParams(q));
+
+      babbageCtrl.broadcastQuery(babbageCtrl.getApiUrl('facts'), angular.copy(q));
+
       dfd.then(function(res) {
         queryResult(res.data, q, state, model);
       });

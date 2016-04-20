@@ -8,7 +8,6 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
     templateUrl: 'babbage-templates/panel.html',
     link: function($scope, $element, attrs, babbageCtrl) {
       var model = null;
-
       $scope.state = {};
       $scope.axes = [];
       $scope.filterAttributes = [];
@@ -219,6 +218,12 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
       });
       $scope.$on('$destroy', unsubscribe);
 
+      var unsubscribeQuery = babbageCtrl.subscribeQuery(function(event, endpoint, params) {
+          params['format'] = 'csv';
+          url = endpoint + '?' + jQuery.param(params);
+          $scope.csvLink = url;
+      })
+      $scope.$on('$destroy', unsubscribeQuery);
     }
   };
 }]);
