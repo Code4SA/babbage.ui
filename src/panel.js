@@ -15,6 +15,7 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
       $scope.getSort = babbageCtrl.getSort;
       $scope.pushSort = babbageCtrl.pushSort;
       $scope.embedLink = null;
+      $scope.csvLink = null;
 
       var update = function() {
         babbageCtrl.setState($scope.state);
@@ -219,10 +220,10 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
       $scope.$on('$destroy', unsubscribe);
 
       var unsubscribeQuery = babbageCtrl.subscribeQuery(
-        function(event, endpoint, params, fact_count) {
+        function(event, endpoint, params, itemCount) {
           params['format'] = 'csv';
           params['page'] = 1;
-          params['pagesize'] = fact_count;
+          params['pagesize'] = factCount;
           url = endpoint + '?' + jQuery.param(params);
           $scope.csvLink = url;
         });

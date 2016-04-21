@@ -39,9 +39,9 @@ ngBabbage.directive('babbageFacts', ['$rootScope', '$http', '$q', function($root
 
       dfd.then(function(res) {
         queryResult(res.data, q, state, model);
-          babbageCtrl.broadcastQuery(endpoint,
-                                     angular.copy(q),
-                                     res.data.total_fact_count);
+        babbageCtrl.broadcastQuery(endpoint,
+                                   angular.copy(q),
+                                   res.data.total_fact_count);
       });
     };
 
