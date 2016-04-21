@@ -27,7 +27,7 @@ angular.module("babbage-templates/pager.html", []).run(["$templateCache", functi
 
 angular.module("babbage-templates/panel.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("babbage-templates/panel.html",
-    "<div class=\"panel panel-default\" ng-repeat=\"axis in axes\"><div class=\"panel-heading\"><strong>{{axis.label}}</strong><div class=\"btn-group\" dropdown ng-show=\"axis.available.length\">&mdash; <a dropdown-toggle class=\"ng-link\">{{axis.addLabel}}</a><ul class=\"dropdown-menu\" role=\"menu\"><li ng-repeat=\"opt in axis.available\"><a ng-click=\"add(axis, opt.ref)\"><strong>{{opt.label}}</strong> {{opt.subLabel}}</a></li></ul></div></div><table class=\"table\"><tr ng-repeat=\"opt in axis.active\"><td colspan=\"2\"><div class=\"pull-right\"><span ng-switch=\"getSort(opt.ref).direction\"><a ng-switch-when=\"desc\" ng-click=\"pushSort(opt.ref, 'asc')\" class=\"ng-link ng-icon\"><i class=\"fa fa-sort-amount-desc\"></i></a> <a ng-switch-when=\"asc\" ng-click=\"pushSort(opt.ref, 'desc')\" class=\"ng-link ng-icon\"><i class=\"fa fa-sort-amount-asc\"></i></a> <a ng-switch-default ng-click=\"pushSort(opt.ref, 'desc')\" class=\"ng-link ng-icon\"><i class=\"fa fa-sort-amount-desc\"></i></a></span> <a ng-click=\"remove(axis, opt.ref)\" ng-show=\"axis.remove\" class=\"ng-link ng-icon\"><i class=\"fa fa-times\"></i></a></div><strong>{{opt.label}}</strong> {{opt.subLabel}}</td></tr></table></div><div class=\"panel panel-default\"><div class=\"panel-heading\"><strong>Filters</strong><div class=\"btn-group\" dropdown ng-show=\"filterAttributes.length\">&mdash; <a dropdown-toggle class=\"ng-link\">add filter</a><ul class=\"dropdown-menu\" role=\"menu\"><li ng-repeat=\"attr in filterAttributes\"><a ng-click=\"addFilter(attr)\"><strong>{{attr.label}}</strong> {{attr.subLabel}}</a></li></ul></div></div><table class=\"table table-panel\"><tbody ng-repeat=\"filter in filters\"><tr><td colspan=\"2\"><strong>{{filter.attr.label}}</strong> {{filter.attr.subLabel}}</td><td width=\"1%\"><span class=\"pull-right\"><a ng-click=\"removeFilter(filter)\" class=\"ng-link\"><i class=\"fa fa-times\"></i></a></span></td></tr><tr class=\"adjoined\"><td width=\"1%\" class=\"middle\">is</td><td width=\"95%\"><ui-select ng-model=\"filter.value\" disable-search=\"false\" on-select=\"setFilter(filter, $item, $model)\"><ui-select-match placeholder=\"Pick one...\">{{$select.selected}}</ui-select-match><ui-select-choices repeat=\"v as v in filter.values | filter: $select.search track by $index\"><div ng-bind=\"v\"></div></ui-select-choices></ui-select></td><td class=\"middle\"></td></tr></tbody></table></div>");
+    "<div class=\"panel panel-default\" ng-repeat=\"axis in axes\"><div class=\"panel-heading\"><strong>{{axis.label}}</strong><div class=\"btn-group\" dropdown ng-show=\"axis.available.length\">&mdash; <a dropdown-toggle class=\"ng-link\">{{axis.addLabel}}</a><ul class=\"dropdown-menu\" role=\"menu\"><li ng-repeat=\"opt in axis.available\"><a ng-click=\"add(axis, opt.ref)\"><strong>{{opt.label}}</strong> {{opt.subLabel}}</a></li></ul></div></div><table class=\"table\"><tr ng-repeat=\"opt in axis.active\"><td colspan=\"2\"><div class=\"pull-right\"><span ng-switch=\"getSort(opt.ref).direction\"><a ng-switch-when=\"desc\" ng-click=\"pushSort(opt.ref, 'asc')\" class=\"ng-link ng-icon\"><i class=\"fa fa-sort-amount-desc\"></i></a> <a ng-switch-when=\"asc\" ng-click=\"pushSort(opt.ref, 'desc')\" class=\"ng-link ng-icon\"><i class=\"fa fa-sort-amount-asc\"></i></a> <a ng-switch-default ng-click=\"pushSort(opt.ref, 'desc')\" class=\"ng-link ng-icon\"><i class=\"fa fa-sort-amount-desc\"></i></a></span> <a ng-click=\"remove(axis, opt.ref)\" ng-show=\"axis.remove\" class=\"ng-link ng-icon\"><i class=\"fa fa-times\"></i></a></div><strong>{{opt.label}}</strong> {{opt.subLabel}}</td></tr></table></div><div class=\"panel panel-default\"><div class=\"panel-heading\"><strong>Filters</strong><div class=\"btn-group\" dropdown ng-show=\"filterAttributes.length\">&mdash; <a dropdown-toggle class=\"ng-link\">add filter</a><ul class=\"dropdown-menu\" role=\"menu\"><li ng-repeat=\"attr in filterAttributes\"><a ng-click=\"addFilter(attr)\"><strong>{{attr.label}}</strong> {{attr.subLabel}}</a></li></ul></div></div><table class=\"table table-panel\"><tbody ng-repeat=\"filter in filters\"><tr><td colspan=\"2\"><strong>{{filter.attr.label}}</strong> {{filter.attr.subLabel}}</td><td width=\"1%\"><span class=\"pull-right\"><a ng-click=\"removeFilter(filter)\" class=\"ng-link\"><i class=\"fa fa-times\"></i></a></span></td></tr><tr class=\"adjoined\"><td width=\"1%\" class=\"middle\">is</td><td width=\"95%\"><ui-select ng-model=\"filter.value\" disable-search=\"false\" on-select=\"setFilter(filter, $item, $model)\"><ui-select-match placeholder=\"Pick one...\">{{$select.selected}}</ui-select-match><ui-select-choices repeat=\"v as v in filter.values | filter: $select.search track by $index\"><div ng-bind=\"v\"></div></ui-select-choices></ui-select></td><td class=\"middle\"></td></tr></tbody></table></div><div class=\"btn\" ng-show=\"csvLink != null\"><a class=\"btn btn-default\" href=\"{{ csvLink }}\">Download CSV</a></div>");
 }]);
 
 angular.module("babbage-templates/sankey.html", []).run(["$templateCache", function($templateCache) {
@@ -42,7 +42,7 @@ angular.module("babbage-templates/treemap.html", []).run(["$templateCache", func
 
 angular.module("babbage-templates/workspace.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("babbage-templates/workspace.html",
-    "<babbage endpoint=\"{{endpoint}}\" cube=\"{{cube}}\" state=\"state\" update=\"update(state)\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"pull-right\"><div class=\"btn-group spaced\" role=\"group\"><a class=\"btn btn-default\" ng-class=\"{'active': view == 'facts'}\" ng-click=\"setView('facts')\"><i class=\"fa fa-table\"></i> Items</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'crosstab'}\" ng-click=\"setView('crosstab')\"><i class=\"fa fa-cubes\"></i> Pivot table</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'barchart'}\" ng-click=\"setView('barchart')\"><i class=\"fa fa-bar-chart\"></i> Bar chart</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'linechart'}\" ng-click=\"setView('linechart')\"><i class=\"fa fa-line-chart\"></i> Line chart</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'treemap'}\" ng-click=\"setView('treemap')\"><i class=\"fa fa-th-large\"></i> Treemap</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'sankey'}\" ng-click=\"setView('sankey')\"><i class=\"fa fa-random\"></i> Flow</a></div></div></div></div><div class=\"row\"><div class=\"col-md-9\"><div ng-if=\"view == 'crosstab'\"><babbage-crosstab></babbage-crosstab></div><div ng-if=\"view == 'facts'\"><babbage-facts></babbage-facts></div><div ng-if=\"view == 'treemap'\"><babbage-treemap></babbage-treemap></div><div ng-if=\"view == 'barchart'\"><babbage-chart chart-type=\"bar\"></babbage-chart></div><div ng-if=\"view == 'linechart'\"><babbage-chart chart-type=\"line\"></babbage-chart></div><div ng-if=\"view == 'sankey'\"><babbage-sankey></babbage-sankey></div></div><div class=\"col-md-3\"><babbage-panel></babbage-panel><div class=\"btn\"><a class=\"btn btn-default download-csv\" href=\"download\">Download CSV</a></div><div class=\"embed-link\"><p class=\"help-block\">Embed this view into another website:</p><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-external-link-square\"></i></span> <input type=\"text\" class=\"form-control\" readonly=\"readonly\" value=\"<style>.babbage-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;} .babbage-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class='babbage-embed'><iframe src='{{embedLink}}' frameborder='0' allowfullscreen></iframe></div>\"></div></div></div></div></babbage>");
+    "<babbage endpoint=\"{{endpoint}}\" cube=\"{{cube}}\" state=\"state\" update=\"update(state)\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"pull-right\"><div class=\"btn-group spaced\" role=\"group\"><a class=\"btn btn-default\" ng-class=\"{'active': view == 'facts'}\" ng-click=\"setView('facts')\"><i class=\"fa fa-table\"></i> Items</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'crosstab'}\" ng-click=\"setView('crosstab')\"><i class=\"fa fa-cubes\"></i> Pivot table</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'barchart'}\" ng-click=\"setView('barchart')\"><i class=\"fa fa-bar-chart\"></i> Bar chart</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'linechart'}\" ng-click=\"setView('linechart')\"><i class=\"fa fa-line-chart\"></i> Line chart</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'treemap'}\" ng-click=\"setView('treemap')\"><i class=\"fa fa-th-large\"></i> Treemap</a> <a class=\"btn btn-default\" ng-class=\"{'active': view == 'sankey'}\" ng-click=\"setView('sankey')\"><i class=\"fa fa-random\"></i> Flow</a></div></div></div></div><div class=\"row\"><div class=\"col-md-9\"><div ng-if=\"view == 'crosstab'\"><babbage-crosstab></babbage-crosstab></div><div ng-if=\"view == 'facts'\"><babbage-facts></babbage-facts></div><div ng-if=\"view == 'treemap'\"><babbage-treemap></babbage-treemap></div><div ng-if=\"view == 'barchart'\"><babbage-chart chart-type=\"bar\"></babbage-chart></div><div ng-if=\"view == 'linechart'\"><babbage-chart chart-type=\"line\"></babbage-chart></div><div ng-if=\"view == 'sankey'\"><babbage-sankey></babbage-sankey></div></div><div class=\"col-md-3\"><babbage-panel></babbage-panel><div class=\"embed-link\"><p class=\"help-block\">Embed this view into another website:</p><div class=\"input-group\"><span class=\"input-group-addon\"><i class=\"fa fa-external-link-square\"></i></span> <input type=\"text\" class=\"form-control\" readonly=\"readonly\" value=\"<style>.babbage-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;} .babbage-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class='babbage-embed'><iframe src='{{embedLink}}' frameborder='0' allowfullscreen></iframe></div>\"></div></div></div></div></babbage>");
 }]);
 ;var ngBabbage = angular.module('ngBabbage', ['ngBabbage.templates']);
 
@@ -176,6 +176,22 @@ ngBabbage.directive('babbage', ['$http', '$rootScope', '$location', 'babbageApi'
 
       self.subscribe = function(listener) {
         return $scope.$on('babbageUpdate', listener);
+      };
+
+      self.subscribeQuery = function(listener) {
+        return $scope.$on('babbageQuery', listener);
+      };
+
+      self.broadcastQuery = function(endpoint, params, item_count) {
+        $scope.$broadcast('babbageQuery', endpoint, params, item_count);
+      };
+
+      self.subscribeInvalidateQuery = function(listener) {
+        return $scope.$on('babbageInvalidateQuery', listener);
+      };
+
+      self.broadcastInvalidateQuery = function() {
+        $scope.$broadcast('babbageInvalidateQuery');
       };
 
       self.getState = function() {
@@ -356,7 +372,10 @@ ngBabbage.directive('babbageChart', ['$rootScope', '$http', function($rootScope,
             grouping = asArray(state.grouping)[0],
             value = asArray(state.value)[0];
 
-        if (!value || !category) return;
+        if (!value || !category) {
+          babbageCtrl.broadcastInvalidateQuery();
+          return;
+        }
 
         var q = babbageCtrl.getQuery();
         q.aggregates = [value];
@@ -383,10 +402,14 @@ ngBabbage.directive('babbageChart', ['$rootScope', '$http', function($rootScope,
         q.page = 0;
         q.pagesize = 10000;
 
-        var dfd = $http.get(babbageCtrl.getApiUrl('aggregate'),
-                            babbageCtrl.queryParams(q));
+        var endpoint = babbageCtrl.getApiUrl('aggregate');
+        var dfd = $http.get(endpoint, babbageCtrl.queryParams(q));
+
         dfd.then(function(res) {
           queryResult(res.data, q, model, state, category, grouping, value);
+          babbageCtrl.broadcastQuery(endpoint,
+                                     angular.copy(q),
+                                     res.data.total_cell_count);
         });
       };
 
@@ -577,10 +600,14 @@ ngBabbage.directive('babbageCrosstab', ['$rootScope', '$http', function($rootSco
       }
       q.order = order;
 
-      var dfd = $http.get(babbageCtrl.getApiUrl('aggregate'),
-                          babbageCtrl.queryParams(q));
+      var endpoint = babbageCtrl.getApiUrl('aggregate');
+      var dfd = $http.get(endpoint, babbageCtrl.queryParams(q));
+
       dfd.then(function(res) {
         queryResult(res.data, q, model, state);
+        babbageCtrl.broadcastQuery(endpoint,
+                                   angular.copy(q),
+                                   res.data.total_cell_count);
       });
     };
 
@@ -729,10 +756,14 @@ ngBabbage.directive('babbageFacts', ['$rootScope', '$http', '$q', function($root
       var aq = angular.copy(q);
       aq.drilldown = aq.fields = [];
       aq.page = 0;
-      var dfd = $http.get(babbageCtrl.getApiUrl('facts'),
-                          babbageCtrl.queryParams(q));
+      var endpoint = babbageCtrl.getApiUrl('facts');
+      var dfd = $http.get(endpoint, babbageCtrl.queryParams(q));
+
       dfd.then(function(res) {
         queryResult(res.data, q, state, model);
+        babbageCtrl.broadcastQuery(endpoint,
+                                   angular.copy(q),
+                                   res.data.total_fact_count);
       });
     };
 
@@ -884,7 +915,6 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
     templateUrl: 'babbage-templates/panel.html',
     link: function($scope, $element, attrs, babbageCtrl) {
       var model = null;
-
       $scope.state = {};
       $scope.axes = [];
       $scope.filterAttributes = [];
@@ -892,6 +922,7 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
       $scope.getSort = babbageCtrl.getSort;
       $scope.pushSort = babbageCtrl.pushSort;
       $scope.embedLink = null;
+      $scope.csvLink = null;
 
       var update = function() {
         babbageCtrl.setState($scope.state);
@@ -1095,6 +1126,21 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
       });
       $scope.$on('$destroy', unsubscribe);
 
+      var unsubscribeQuery = babbageCtrl.subscribeQuery(
+        function(event, endpoint, params, itemCount) {
+          params['format'] = 'csv';
+          params['page'] = 1;
+          params['pagesize'] = itemCount;
+          url = endpoint + '?' + jQuery.param(params);
+          $scope.csvLink = url;
+        });
+      $scope.$on('$destroy', unsubscribeQuery);
+
+      var unsubscribeInvalidateQuery = babbageCtrl.subscribeInvalidateQuery(
+        function(event) {
+          $scope.csvLink = null;
+        });
+      $scope.$on('$destroy', unsubscribeInvalidateQuery);
     }
   };
 }]);
@@ -1125,6 +1171,7 @@ ngBabbage.directive('babbageSankey', ['$rootScope', '$http', '$document', functi
       var q = babbageCtrl.getQuery();
       q.aggregates = aggregate;
       if (!source || !target) {
+        babbageCtrl.broadcastInvalidateQuery();
         return;
       }
       q.drilldown = [source, target];
@@ -1148,8 +1195,8 @@ ngBabbage.directive('babbageSankey', ['$rootScope', '$http', '$document', functi
 
       scope.queryLoaded = true;
       scope.cutoffWarning = false;
-      var dfd = $http.get(babbageCtrl.getApiUrl('aggregate'),
-                          babbageCtrl.queryParams(q));
+      var endpoint = babbageCtrl.getApiUrl('aggregate');
+      var dfd = $http.get(endpoint, babbageCtrl.queryParams(q));
 
       var wrapper = element.querySelectorAll('.sankey-babbage')[0],
           size = babbageCtrl.size(wrapper, function(w) { return w * 0.6; });
@@ -1164,6 +1211,9 @@ ngBabbage.directive('babbageSankey', ['$rootScope', '$http', '$document', functi
 
       dfd.then(function(res) {
         queryResult(size, res.data, q, model, state);
+        babbageCtrl.broadcastQuery(endpoint,
+                                   angular.copy(q),
+                                   res.data.total_cell_count);
       });
     };
 
@@ -1351,6 +1401,7 @@ ngBabbage.directive('babbageTreemap', ['$rootScope', '$http', '$document', funct
       var q = babbageCtrl.getQuery();
       q.aggregates = area;
       if (!tile) {
+        babbageCtrl.broadcastInvalidateQuery();
         return;
       }
       q.drilldown = [tile];
@@ -1372,8 +1423,8 @@ ngBabbage.directive('babbageTreemap', ['$rootScope', '$http', '$document', funct
 
       scope.cutoffWarning = false;
       scope.queryLoaded = true;
-      var dfd = $http.get(babbageCtrl.getApiUrl('aggregate'),
-                          babbageCtrl.queryParams(q));
+      var endpoint = babbageCtrl.getApiUrl('aggregate');
+      var dfd = $http.get(endpoint, babbageCtrl.queryParams(q));
 
       var wrapper = element.querySelectorAll('.treemap-babbage')[0],
           size = babbageCtrl.size(wrapper, function(w) { return w * 0.6; });
@@ -1392,6 +1443,9 @@ ngBabbage.directive('babbageTreemap', ['$rootScope', '$http', '$document', funct
 
       dfd.then(function(res) {
         queryResult(res.data, q, model, state);
+        babbageCtrl.broadcastQuery(endpoint,
+                                   angular.copy(q),
+                                   res.data.total_cell_count);
       });
     };
 
