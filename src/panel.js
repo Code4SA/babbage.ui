@@ -223,11 +223,17 @@ ngBabbage.directive('babbagePanel', ['$rootScope', 'slugifyFilter', function($ro
         function(event, endpoint, params, itemCount) {
           params['format'] = 'csv';
           params['page'] = 1;
-          params['pagesize'] = factCount;
+          params['pagesize'] = itemCount;
           url = endpoint + '?' + jQuery.param(params);
           $scope.csvLink = url;
         });
       $scope.$on('$destroy', unsubscribeQuery);
+
+      var unsubscribeInvalidateQuery = babbageCtrl.subscribeInvalidateQuery(
+        function(event) {
+          $scope.csvLink = null;
+        });
+      $scope.$on('$destroy', unsubscribeInvalidateQuery);
     }
   };
 }]);
